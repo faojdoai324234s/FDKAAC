@@ -26,6 +26,7 @@ jobs:
 
     - name: Compile
       shell: cmd
+      working-directory: ${{github.workspace}}/fdk-aac
       run: |
         echo "Building Debug..."
         cmake -B build -D CMAKE_BUILD_TYPE=Debug
