@@ -74,7 +74,6 @@ jobs:
         --enable-parser=aac \
         --disable-decoder=libdav1d \
         --enable-libfdk-aac \
-        --libfdk-aac=$FDKAAC_FOLDER \
         --enable-d3d11va \
         --enable-d3d12va \
         --enable-dxva2 \
