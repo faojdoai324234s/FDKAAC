@@ -20,7 +20,7 @@ jobs:
         install: >-
           diffutils
           make
-          mingw-w64-fdk-aac
+          fdk-aac
           nasm
           yasm
         path-type: inherit
