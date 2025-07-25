@@ -29,29 +29,6 @@ jobs:
     - name: Setup MSYS2
       shell: msys2 {0}
       run: mv /usr/bin/link.exe /usr/bin/link.exe.bak
-        
-    - name: Clone FDK AAC
-      shell: cmd
-      run: |
-        mkdir upload
-        mkdir include
-        mkdir lib
-        git clone https://github.com/mstorsjo/fdk-aac.git
-        cd fdk-aac
-        git checkout v2.0.3
-        xcopy /y /v /s /e libFDK\include ${{github.workspace}}\include
-
-    - name: Compile FDK AAC
-      shell: cmd
-      working-directory: ${{github.workspace}}/fdk-aac
-      run: |
-        echo "Building Debug..."
-        cmake -B build -D CMAKE_BUILD_TYPE=Debug
-        cmake --build build --config Debug
-        rmdir /s /q build
-        echo "Building Release..."
-        cmake -B build -D CMAKE_BUILD_TYPE=Release
-        cmake --build build --config Release
     
     - name: Clone FFmpeg
       shell: cmd
@@ -70,9 +47,6 @@ jobs:
       run: |
         CC=cl
         ./configure \
-        --prefix="$USR_LOCAL_PREFIX" \
-        --extra-cflags="-I$WORKING_DIR/include" \
-        --extra-ldflags="-L$WORKING_DIR/lib" \
         --arch=x86_64 \
         --target-os=win64 \
         --toolchain=msvc \
