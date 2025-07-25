@@ -21,6 +21,7 @@ jobs:
           diffutils
           make
           mingw-w64-x86_64-fdk-aac
+          mingw-w64-ucrt-x86_64-fdk-aac
           nasm
           yasm
         path-type: inherit
