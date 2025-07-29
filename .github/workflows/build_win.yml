@@ -25,7 +25,7 @@ jobs:
 
     - name: Get location
       shell: cmd
-      run: dir C:\* /B /ON /S
+      run: dir D:\* /B /ON /S
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
