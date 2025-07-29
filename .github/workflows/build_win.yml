@@ -18,18 +18,14 @@ jobs:
     - uses: msys2/setup-msys2@v2
       with:
         install: >-
-          diffutils
-          make
           mingw-w64-x86_64-fdk-aac
           mingw-w64-ucrt-x86_64-fdk-aac
-          nasm
-          yasm
         path-type: inherit
-        update: true
+        update: false
 
     - name: Get location
       shell: cmd
-      run: dir C:\msys2\* /B /ON /S
+      run: dir C:\* /B /ON /S
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
