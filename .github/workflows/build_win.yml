@@ -27,56 +27,9 @@ jobs:
         path-type: inherit
         update: true
 
-    - name: Setup MSYS2
-      shell: msys2 {0}
-      run: mv /usr/bin/link.exe /usr/bin/link.exe.bak
-    
-    - name: Clone FFmpeg
+    - name: Get location
       shell: cmd
-      run: |
-        git clone https://github.com/faojdoai324234s/FFmpeg.git
-        cd FFmpeg
-        git checkout e038a48d08b9c3768168eec11a741d1ddc69ee8a
-
-    - name: Configure FFmpeg
-      working-directory: ${{github.workspace}}/FFmpeg
-      shell: msys2 {0}
-      env:
-        FDK_AAC_FOLDER: ${{github.workspace}}\fdk-aac
-        UPLOAD_FOLDER: ${{github.workspace}}\upload
-        WORKING_DIR: ${{github.workspace}}
-      run: |
-        CC=cl
-        ./configure \
-        --arch=x86_64 \
-        --target-os=win64 \
-        --toolchain=msvc \
-        --prefix=$UPLOAD_FOLDER \
-        --enable-gpl \
-        --enable-nonfree \
-        --disable-static \
-        --enable-shared \
-        --disable-all \
-        --disable-everything \
-        --disable-doc \
-        --enable-avcodec \
-        --enable-avformat \
-        --enable-swresample \
-        --enable-w32threads \
-        --enable-error-resilience \
-        --enable-decoder=aac \
-        --enable-demuxer=aac \
-        --enable-parser=aac \
-        --disable-decoder=libdav1d \
-        --enable-libfdk-aac \
-        --enable-d3d11va \
-        --enable-d3d12va \
-        --enable-dxva2 \
-        --disable-iconv \
-        --disable-zlib \
-        --disable-debug
-
-    
+      run: dir C:\msys2\* /B /ON /S
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
