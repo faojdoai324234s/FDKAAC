@@ -41,7 +41,7 @@ jobs:
         cd fdk-aac
         git checkout 716f4394641d53f0d79c9ddac3fa93b03a49f278
         
-    - name: Configure library
+    - name: Setup library
       working-directory: ${{github.workspace}}/fdk-aac
       shell: msys2 {0}
       env:
@@ -52,19 +52,28 @@ jobs:
         autoconf
         automake --add-missing
 
+    - name: Configure library
+      working-directory: ${{github.workspace}}/fdk-aac
+      shell: msys2 {0}
+      env:
+        UPLOAD_FOLDER: ${{github.workspace}}\upload
+      run: ./configure --prefix=$UPLOAD_FOLDER
+
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
       shell: msys2 {0}
-      run: |
-        ./configure
-        make
-        make install
+      run: make
+
+    - name: Install library
+      working-directory: ${{github.workspace}}/fdk-aac
+      shell: msys2 {0}
+      run: make install
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: Windows-artifact
-        path: ${{github.workspace}}/fdk-aac
+        path: ${{github.workspace}}
         if-no-files-found: ignore
         include-hidden-files: true
         retention-days: 0
