@@ -28,8 +28,8 @@ jobs:
       working-directory: ${{github.workspace}}/fdk-aac
       shell: cmd
       run: |
-        cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF
-        cmake --build build --config Release
+        cmake -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=OFF
+        cmake --build build --config Debug
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
