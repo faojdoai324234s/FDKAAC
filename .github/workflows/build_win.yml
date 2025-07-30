@@ -1,0 +1,40 @@
+name: Windows Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ilammy/msvc-dev-cmd@v1
+    - uses: msys2/setup-msys2@v2
+      with:
+        install: >-
+          mingw-w64-x86_64-fdk-aac
+          mingw-w64-ucrt-x86_64-fdk-aac
+        path-type: inherit
+        update: false
+
+    - name: Get location
+      shell: cmd
+      run: |
+        echo "First location..."
+        dir D:\a\_temp\msys64\var\lib\pacman\local\mingw-w64-x86_64-fdk-aac-2.0.3-1\* /ON /S
+        echo "Second location..."
+        dir D:\a\_temp\msys64\var\lib\pacman\local\mingw-w64-ucrt-x86_64-fdk-aac-2.0.3-1\* /ON /S
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Windows-artifact
+        path: ${{github.workspace}}/upload
+        if-no-files-found: ignore
+        retention-days: 0
