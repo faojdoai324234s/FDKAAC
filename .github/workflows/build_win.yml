@@ -21,7 +21,6 @@ jobs:
           autoconf
           autoconf-archive
           automake
-          bison
           libtool
           make
           pkg-config
