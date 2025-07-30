@@ -55,7 +55,7 @@ jobs:
       shell: msys2 {0}
       env:
         UPLOAD_FOLDER: ${{github.workspace}}\upload
-      run: ./configure --prefix=/d/a/FDKAAC/FDKAAC/fdk-aac/upload
+      run: ./configure --prefix=/d/a/FDKAAC/FDKAAC/fdk-aac/upload --enable-static
 
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
@@ -71,7 +71,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Windows-artifact
-        path: ${{github.workspace}}
+        path: ${{github.workspace}}/fdk-aac
         if-no-files-found: ignore
         include-hidden-files: true
         retention-days: 0
