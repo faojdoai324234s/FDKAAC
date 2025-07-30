@@ -22,7 +22,6 @@ jobs:
           automake
           libtool
           make
-          pkg-config
         path-type: inherit
         update: true
 
