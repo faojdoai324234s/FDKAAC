@@ -19,7 +19,6 @@ jobs:
       with:
         install: >-
           autoconf
-          autoconf-archive
           automake
           libtool
           make
