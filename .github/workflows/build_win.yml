@@ -40,7 +40,7 @@ jobs:
       env:
         UPLOAD_FOLDER: ${{github.workspace}}\upload
       run: |
-        ./configure
+        ./autogen.sh
 
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
