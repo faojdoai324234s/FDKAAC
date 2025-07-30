@@ -53,7 +53,7 @@ jobs:
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
       shell: msys2 {0}
-      run: automake
+      run: automake --add-missing
 
     - name: Install library
       working-directory: ${{github.workspace}}/fdk-aac
