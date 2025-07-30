@@ -21,6 +21,8 @@ jobs:
           autoconf
           autoconf-archive
           automake
+          bison
+          flex
           libtool
           make
           pkg-config
