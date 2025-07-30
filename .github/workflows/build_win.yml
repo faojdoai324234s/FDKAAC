@@ -18,7 +18,12 @@ jobs:
     - uses: msys2/setup-msys2@v2
       with:
         install: >-
+          autoconf
+          autoconf-archive
+          automake
+          libtool
           make
+          pkg-config
         path-type: inherit
         update: true
 
@@ -40,7 +45,7 @@ jobs:
       env:
         UPLOAD_FOLDER: ${{github.workspace}}\upload
       run: |
-        ./autogen.sh
+        ./configure.ac
 
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
