@@ -55,16 +55,11 @@ jobs:
       working-directory: ${{github.workspace}}/fdk-aac
       shell: msys2 {0}
       run: automake --add-missing
-
-    - name: Install library
-      working-directory: ${{github.workspace}}/fdk-aac
-      shell: msys2 {0}
-      run: make install
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: Windows-artifact
-        path: ${{github.workspace}}/upload
+        path: ${{github.workspace}}/fdk-aac
         if-no-files-found: ignore
         retention-days: 0
