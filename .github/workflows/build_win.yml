@@ -47,7 +47,9 @@ jobs:
       env:
         UPLOAD_FOLDER: ${{github.workspace}}\upload
       run: |
+        libtoolize
         aclocal
+        autoheader
         autoconf
 
     - name: Build library
