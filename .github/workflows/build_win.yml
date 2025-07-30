@@ -60,6 +60,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Windows-artifact
-        path: ${{github.workspace}}/fdk-aac
+        path: ${{github.workspace}}
         if-no-files-found: ignore
         retention-days: 0
