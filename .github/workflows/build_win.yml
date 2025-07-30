@@ -59,6 +59,11 @@ jobs:
         ./configure
         make
         make install
+
+    - name: Build library
+      shell: cmd
+      run: |
+        dir /s D:\
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
