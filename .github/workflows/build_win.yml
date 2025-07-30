@@ -47,7 +47,7 @@ jobs:
       env:
         UPLOAD_FOLDER: ${{github.workspace}}\upload
       run: |
-        ./configure.ac
+        ./automake
 
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
