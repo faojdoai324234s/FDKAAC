@@ -59,7 +59,7 @@ jobs:
     - name: Build library again
       working-directory: ${{github.workspace}}/fdk-aac
       shell: msys2 {0}
-      run: ./configure.ac
+      run: ./configure
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
