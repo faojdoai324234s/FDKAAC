@@ -1,0 +1,73 @@
+name: Windows Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ilammy/msvc-dev-cmd@v1
+    - uses: msys2/setup-msys2@v2
+      with:
+        install: >-
+          autoconf
+          automake
+          libtool
+          make
+        path-type: inherit
+        update: true
+
+    - name: Setup MSYS2
+      shell: msys2 {0}
+      run: mv /usr/bin/link.exe /usr/bin/link.exe.bak
+        
+    - name: Clone FDK-AAC
+      shell: cmd
+      run: |
+        mkdir upload
+        git clone https://github.com/mstorsjo/fdk-aac.git
+        cd fdk-aac
+        git checkout 716f4394641d53f0d79c9ddac3fa93b03a49f278
+        
+    - name: Setup library
+      working-directory: ${{github.workspace}}/fdk-aac
+      shell: msys2 {0}
+      run: |
+        libtoolize
+        aclocal
+        autoconf
+        automake --add-missing
+
+    - name: Configure library
+      working-directory: ${{github.workspace}}/fdk-aac
+      shell: msys2 {0}
+      env:
+        UPLOAD_FOLDER: ${{github.workspace}}\upload
+      run: ./configure --prefix=/d/a/FDKAAC/FDKAAC/fdk-aac/upload --enable-static --disable-shared
+
+    - name: Build library
+      working-directory: ${{github.workspace}}/fdk-aac
+      shell: msys2 {0}
+      run: make
+
+    - name: Install library
+      working-directory: ${{github.workspace}}/fdk-aac
+      shell: msys2 {0}
+      run: make install
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Windows-artifact
+        path: ${{github.workspace}}/fdk-aac
+        if-no-files-found: ignore
+        include-hidden-files: true
+        retention-days: 0
