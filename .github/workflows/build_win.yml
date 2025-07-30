@@ -44,8 +44,6 @@ jobs:
     - name: Setup library
       working-directory: ${{github.workspace}}/fdk-aac
       shell: msys2 {0}
-      env:
-        UPLOAD_FOLDER: ${{github.workspace}}\upload
       run: |
         libtoolize
         aclocal
@@ -57,7 +55,7 @@ jobs:
       shell: msys2 {0}
       env:
         UPLOAD_FOLDER: ${{github.workspace}}\upload
-      run: ./configure --prefix=$UPLOAD_FOLDER
+      run: ./configure --prefix=/d/a/FDKAAC/FDKAAC/fdk-aac/upload
 
     - name: Build library
       working-directory: ${{github.workspace}}/fdk-aac
